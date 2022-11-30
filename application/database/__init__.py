@@ -13,6 +13,7 @@ class User(db.Model):
     password = db.Column(db.String(128))
     email = db.Column(db.String(128))
     phone = db.Column(db.String(128))
+    address = db.Column(db.String(128))
 
     @classmethod
     def all(cls):
