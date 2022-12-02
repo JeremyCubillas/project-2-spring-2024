@@ -23,7 +23,7 @@ You will need to make the following changes to make this work:
 4. Modify the [tests/conftest.py Fixture](tests/conftest.py) to populate the address field
    with [faker address](https://faker.readthedocs.io/en/master/providers/faker.providers.address.html).
 5. Set the seed in [tests/conftest.py Fixture](tests/conftest.py) to 4321
-6. Modify the [application/bp/homepage/templates/user.html](application/bp/homepage/templates/user.html) file to add the
+6. Modify the [application/bp/homepage/templates/user.html](application/bp/authentication/templates/user.html) file to add the
    jinja code to display the address field.
 
 # Overview Video
@@ -75,3 +75,6 @@ You will need to make the following changes to make this work:
 * https://www.sqlalchemy.org/
 * https://alembic.sqlalchemy.org/en/latest/
 * https://github.com/miguelgrinberg/flask-migrate
+* https://flask-wtf.readthedocs.io/en/1.0.x/  <-Very Useful
+* https://bootstrap-flask.readthedocs.io/en/stable/
+* https://bootstrap-flask.readthedocs.io/en/stable/#

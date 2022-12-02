@@ -10,7 +10,7 @@
     {% else -%}
         {% for user in users %}
             <hr>
-            <a href="{{ url_for('homepage.user_by_id', user_id=user.id )}}">View</a> {{ user.name }} - {{ user.email }} - {{ user.password }}
+            <a href="{{ url_for('authentication.user_by_id', user_id=user.id )}}">View</a> {{ user.name }} - {{ user.email }} - {{ user.password }}
         {% endfor %}
     {% endif %}
 
