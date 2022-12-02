@@ -1,6 +1,6 @@
-from flask import Blueprint, render_template, redirect, url_for
+from flask import Blueprint, render_template, redirect, url_for, flash
 
-from application.database import User
+from application.database import User, db
 from application.bp.authentication.forms import RegisterForm
 
 authentication = Blueprint('authentication', __name__, template_folder='templates')
@@ -24,9 +24,4 @@ def user_by_id(user_id):
     return render_template('user.html', user=user)
 
 
-@authentication.route('/registration', methods=['GET', 'POST'])
-def registration():
-    form = RegisterForm()
-    if form.validate_on_submit():
-        return redirect(url_for('dashboard', name='John'))
-    return render_template('registration.html', form=form)
+

@@ -9,11 +9,16 @@ db = SQLAlchemy()
 class User(db.Model):
     """User Model"""
     id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(128))
-    password = db.Column(db.String(128))
     email = db.Column(db.String(128))
-    phone = db.Column(db.String(128))
-    address = db.Column(db.String(128))
+    password = db.Column(db.String(128))
+
+    def __init__(self, email, password):
+        self.email = email
+        self.password = password
+
+    @classmethod
+    def create(cls, email, password):
+        return cls(email, password)
 
     @classmethod
     def all(cls):
@@ -30,3 +35,7 @@ class User(db.Model):
     @classmethod
     def record_count(cls):
         return cls.query.count()
+
+    def save(self):
+        db.session.add(self)
+        return db.session.commit()

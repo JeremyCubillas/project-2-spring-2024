@@ -1,49 +1,40 @@
-# Flask, SQLAlchemy, Alembic, and Docker
+# Flask, User Registration with WTF Forms
 
-In this assignment, you need to setup the project and add the remote interpreter for the project using the Dockerfile or
-docker-compose flask service. You are required to add a new field to the database model called address and populate it
-with an address
-using the faker library. The address field should appear when a user is selected from the /users route. You will need to
-set the seed to 4321 in the [conftest.py](tests/conftest.py) file order to generate the same data set that I use for my
-tests. Your first record should be "Jason Brown" and the address should be, "9335 Gloria Street Suite 675 Mathisport, PR
-63759".
-
-My teacher test is looking for this address.
-
-Your users/1 page should look like this [Screenshot](readme_images/address_field_added.png).
-
-You need to run the [tests/test_add_user.py](tests/test_add_user.py) file with pytest, so that it
-creates the users.
-
-You will need to make the following changes to make this work:
-
-1. Modify the [application/database/__ini__.py](application/database/__init__.py) to add an address field.
-2. Run the command to create a migration: flask db migrate -m "added address field"
-3. Run the command to apply the migration: flask db upgrade
-4. Modify the [tests/conftest.py Fixture](tests/conftest.py) to populate the address field
-   with [faker address](https://faker.readthedocs.io/en/master/providers/faker.providers.address.html).
-5. Set the seed in [tests/conftest.py Fixture](tests/conftest.py) to 4321
-6. Modify the [application/bp/homepage/templates/user.html](application/bp/authentication/templates/user.html) file to add the
-   jinja code to display the address field.
+In this assignment, you will need to watch the video and review the code discussed. You should read the articles as well.
+You will need to add the registration route to this [file](application/bp/authentication/__init__.py) 
+and you can view the code [here](readme_images/registration_route.png).
 
 # Overview Video
 
-1. [Part 1 - Overview](https://youtu.be/jUDGkE68Dg0)
-2. [Part  2 - Assignment Completion  with Fixtures]()
+1. [Flask Bootstrap User Registration Part 1](https://youtu.be/IOu5w6P0gVQ)
 
-# Install Commands
+# Specific Readings - Web Security
+1. https://owasp.org/www-community/attacks/csrf  <-must read
+2. https://owasp.org/www-community/attacks/SQL_Injection
+
+# Look Over the documentation for these libraries that I, you will need to become familiar with them to solve problems
+* https://flask-wtf.readthedocs.io/en/1.0.x/  <-Very Useful
+* https://bootstrap-flask.readthedocs.io/en/stable/
+* https://getbootstrap.com
+
+
+# local Install Commands
 
 1. pip(3) install -r requirements.txt
 2. flask db upgrade
 3. flask --debug run or flask run (no debugging)
 4. pytest
 
+# Docker Install / Run Commands
+1. docker compose up
 ## Fix Mac Permission Error after docker compose up --build  command - Run these on the terminal
 
 * chmod +x ./development.sh
 * chmod +x ./production.sh
 
-# Readings - You should at least look these over because you will need to refer to these in the future for your project.
+
+
+# General Readings - You should at least look these over because you will need to refer to these in the future for your project.
 
 * [Flask Routing](https://hackersandslackers.com/flask-routes)
 * [Simple Faker tutorial](https://zetcode.com/python/faker/)
@@ -77,4 +68,4 @@ You will need to make the following changes to make this work:
 * https://github.com/miguelgrinberg/flask-migrate
 * https://flask-wtf.readthedocs.io/en/1.0.x/  <-Very Useful
 * https://bootstrap-flask.readthedocs.io/en/stable/
-* https://bootstrap-flask.readthedocs.io/en/stable/#
+* https://getbootstrap.com
