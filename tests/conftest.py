@@ -4,13 +4,16 @@ from faker import Faker
 from application import init_app as create_app
 from application.database import db, User
 
+
 @pytest.fixture(scope='session', autouse=True)
 def faker_session_locale():
     return ['en']
 
+
 @pytest.fixture(scope='session', autouse=True)
 def faker_seed():
     return 4321
+
 
 @pytest.fixture(scope="function")
 def create_300_users(app, faker):
@@ -72,3 +75,19 @@ def app_clean_db():
         db.drop_all()
         yield app
         db.session.remove()
+
+
+@pytest.fixture
+def login(client):
+    """Login helper function"""
+    response = client.post("/registration", data={
+        "email": "steve@steve.com",
+        "password": "testtest",
+        "confirm": "testtest",
+    }, follow_redirects=True)
+
+    return client.post(
+        "/login",
+        data=dict(email='steve@steve.com', password='testtest'),
+        follow_redirects=True
+    )

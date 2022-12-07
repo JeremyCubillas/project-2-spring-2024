@@ -13,7 +13,7 @@ def test_user_registration_success(client):
             "confirm": "testtest",
         }, follow_redirects=True)
 
-        assert response.request.path == url_for('authentication.dashboard')
+        assert response.request.path == url_for('authentication.login')
         assert response.status_code == 200
 
 
@@ -33,3 +33,4 @@ def test_user_registration_duplicate_user_fail(app, client):
         assert response.request.path == url_for('authentication.registration')
         assert response.status_code == 200
         assert b"Already Registered" in response.data
+

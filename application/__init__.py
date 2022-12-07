@@ -6,14 +6,15 @@ from flask_bootstrap import Bootstrap5
 from flask_migrate import Migrate
 from flask_wtf import CSRFProtect
 
-
-from application.database import db
+from application.database import db, User
 import config
 from application.bp.homepage import bp_homepage
 from application.bp.authentication import authentication
+from flask_login import LoginManager
 
 migrate = Migrate()
 csrf = CSRFProtect()
+login_manager = LoginManager()
 
 
 def init_app():
@@ -22,15 +23,21 @@ def init_app():
     app.config.from_object(config.Config())
     csrf.init_app(app)
     bootstrap = Bootstrap5(app)
+    login_manager.login_view = "authentication.login"
+    login_manager.init_app(app)
 
     # Initialize Plugins
     db.init_app(app)
     migrate.init_app(app, db)
 
     with app.app_context():
-
         blueprints = [bp_homepage, authentication]
         # Register Blueprints
         for blueprint in blueprints:
             app.register_blueprint(blueprint)
         return app
+
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.find_user_by_id(user_id)
