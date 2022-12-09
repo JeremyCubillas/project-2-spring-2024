@@ -1,19 +1,50 @@
 # Web Security Overview and Login and Registraion with User Profile
 
 In this assignment, you will need to watch the video and review the code discussed. You will need to add the code to
-make the Login, Registration, and User Profile model work.
-
-## Screenshots of the code
+make the Login, Registration, and User Profile model work. I included the group functionality so you could see a
+complete example of handling forms and how a many-to-many relationship is done. This will be what you need to do in the
+Project 2, except it will be a different type of record/model.
 
 ## Overview Video
 
 1. [Web Security Overview](https://youtu.be/xBSd-U-QB7g)
-2. Repository and Video The Shows HOw to Deploy the App on Oracle Cloud using Docker  [Fixes Video Mistake in Video 1](https://github.com/kaw393939/docker-nginx-flask)
+2. Repository and Video The Shows HOw to Deploy the App on Oracle Cloud using
+   Docker  [Fixes Video Mistake in Video 1](https://github.com/kaw393939/docker-nginx-flask)
 3. [Code OVerview for Login and Adding The Profile Model and Form](https://youtu.be/ScfbDhiUdG4)
+
+#### Basically, you should learn is this workflow:
+
+1. Add the model, create a migration, do the db upgrade
+2. Write tests to test the model
+3. Make a form class and html template to display the form
+4. Make a controller for that page and add the logic to process the form as necessary
+5. Write a test for the controller
+6. Write tests as necessary to verify redirection to wherever the user can view the submitted data.
+
+* Note: Don't forget that you should make tests assert the condition of the database, perform an action to insert a
+  record, and then check the database to see that its added
 
 ## Screenshots of the code
 
+All the following code goes in the route file [here](application/bp/authentication/__init__.py)
+
+1. [Improved Registration with Hashing](readme_images/registration_route.png)
+2. [Login Route](readme_images/registration_route.png)
+3. [Logout Route](readme_images/login_route.png)
+4. [User Profile Route](readme_images/profile_route.png) <- pay attentionp to how i use current_user to get the
+   currently logged in users information
+
+## Code you also need to review / Understand
+
+1. [Database Models](application/database/__init__.py) <- Look at how I setup relationships and add fields
+2. [Form Example for User Profile](application/bp/authentication/forms/__init__.py) <- Look at how the class properties
+   for the profile match the database profile model
+3. [Example of a template to display a form - Same as any template but you need to change the title of the page](application/bp/authentication/templates/login.html)
+4. [How I control visability of links in the main menu](application/templates/base.html) <- Look how i check for the
+   user being authenticated with a jinja if statement
+
 ### Login Code
+
 1. [Login route]()
 
 # local Install Commands

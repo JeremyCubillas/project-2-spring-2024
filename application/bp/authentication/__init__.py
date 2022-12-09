@@ -26,61 +26,6 @@ def user_by_id(user_id):
     return render_template('user.html', user=user)
 
 
-@authentication.route('/registration', methods=['GET', 'POST'])
-def registration():
-    form = RegisterForm()
-    if form.validate_on_submit():
-        user = User.find_user_by_email(form.email.data)
-        if user is None:
-            user = User.create(form.email.data, form.password.data)
-            user.save()
-            return redirect(url_for('authentication.login'))
-        else:
-            flash('Already Registered')
-    return render_template('registration.html', form=form)
-
-
-@authentication.route('/login', methods=['GET', 'POST'])
-def login():
-    form = LoginForm()
-    if form.validate_on_submit():
-        user = User.find_user_by_email(form.email.data)
-        if user is None:
-            flash('User Not Found')
-        elif user.check_password(form.password.data):
-            flash('Welcome')
-            user.authenticated = True
-            user.save()
-            login_user(user)
-            next_page = request.args.get('next')
-            return redirect(next_page or url_for('authentication.dashboard'))
-        else:
-            flash('Password Incorrect')
-    return render_template('login.html', form=form)
-
-
-@authentication.route('/logout')
-@login_required
-def logout():
-    current_user.authenticated = False
-    current_user.save()
-    logout_user()
-    flash("You are Logged Out")
-    return redirect(url_for('homepage.homepage'))
-
-
-@authentication.route('/profile', methods=['GET', 'POST'])
-@login_required
-def profile():
-    form = ProfileForm(obj=current_user.profile)
-    if form.validate_on_submit():
-        user_profile = Profile(form.first_name.data, form.last_name.data, form.phone.data)
-        current_user.profile = user_profile
-        current_user.save()
-
-    return render_template('profile.html', form=form)
-
-
 @authentication.route('/groups/new', methods=['GET', 'POST'])
 @login_required
 def group():
@@ -88,7 +33,7 @@ def group():
     if form.validate_on_submit():
         group = Group(form.title.data)
         group.save()
-        return redirect(url_for('authentication.groups'))
+        return redirect(url_for('authentication.groups', page='1'))
 
     return render_template('group_form.html', form=form)
 
