@@ -5,12 +5,14 @@ make the Login, Registration, and User Profile model work. I included the group 
 complete example of handling forms and how a many-to-many relationship is done. This will be what you need to do in the
 Project 2, except it will be a different type of record/model.
 
-## Overview Video
 
-1. [Web Security Overview](https://youtu.be/xBSd-U-QB7g)
+## Unit Videos
+
+1. [Video 1 - Web Security Overview](https://youtu.be/xBSd-U-QB7g)
+* [Video 1 PowerPoint - PDF](readme_images/web_security.pdf)
 2. Repository and Video The Shows HOw to Deploy the App on Oracle Cloud using
-   Docker  [Fixes Video Mistake in Video 1](https://github.com/kaw393939/docker-nginx-flask)
-3. [Code OVerview for Login and Adding The Profile Model and Form](https://youtu.be/ScfbDhiUdG4)
+   Docker  [Video 1a Fixes Video Mistake in Video 1](https://github.com/kaw393939/docker-nginx-flask)
+3. [Video 2 - Code OVerview for Login and Adding The Profile Model and Form](https://youtu.be/ScfbDhiUdG4)
 
 #### Basically, you should learn is this workflow:
 
@@ -31,12 +33,12 @@ All the following code goes in the route file [here](application/bp/authenticati
 1. [Improved Registration with Hashing](readme_images/registration_route.png)
 2. [Login Route](readme_images/registration_route.png)
 3. [Logout Route](readme_images/login_route.png)
-4. [User Profile Route](readme_images/profile_route.png) <- pay attentionp to how i use current_user to get the
-   currently logged in users information
+4. [User Profile Route](readme_images/profile_route.png) <- pay attention to how i use current_user to get the
+   currently logged-in users information
 
 ## Code you also need to review / Understand
 
-1. [Database Models](application/database/__init__.py) <- Look at how I setup relationships and add fields
+1. [Database Models](application/database/__init__.py) <- Look at how I set up relationships and add fields
 2. [Form Example for User Profile](application/bp/authentication/forms/__init__.py) <- Look at how the class properties
    for the profile match the database profile model
 3. [Example of a template to display a form - Same as any template but you need to change the title of the page](application/bp/authentication/templates/login.html)
@@ -47,7 +49,12 @@ All the following code goes in the route file [here](application/bp/authenticati
 
 1. [Login route]()
 
-# local Install Commands
+# Optional Readings
+1. [SQL Alchemy with Flask Relationships](https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/)
+2. [Flask Routing](https://hackersandslackers.com/flask-routes/)
+3. [Flask WTF Forms](https://www.digitalocean.com/community/tutorials/how-to-use-and-validate-web-forms-with-flask-wtf)
+4. [Flask Login Explained](https://www.freecodecamp.org/news/how-to-authenticate-users-in-flask/)
+# local Installation Commands
 
 1. pip(3) install -r requirements.txt
 2. flask db upgrade
