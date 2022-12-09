@@ -11,8 +11,8 @@ ENV QR_CODE_IMAGE_DIRECTORY='static'
 ENV QR_CODE_DEFAULT_URL='https://www.njit.edu'
 ENV QR_CODE_DEFAULT_FILE_NAME='default.png'
 WORKDIR /home/myuser
-COPY --chown=myuser:myuser . .
 RUN pip3 install -r requirements.txt
+COPY --chown=myuser:myuser . .
 CMD ["./production.sh"]
 
 # CMD ["runuser", "-u", "myuser", "--", "python", "-m", "flask", "run", "--host=0.0.0.0"]

@@ -1,5 +1,6 @@
 import pytest
 from faker import Faker
+from flask.testing import FlaskClient
 
 from application import init_app as create_app
 from application.database import db, User
@@ -16,9 +17,9 @@ def faker_seed():
 
 
 @pytest.fixture(scope="function")
-def create_300_users(app, faker):
+def create_5_users(app, faker):
     user_list = []
-    number_of_users = 300
+    number_of_users = 5
 
     with app.app_context():
         for i in range(number_of_users):
@@ -54,8 +55,10 @@ def app():
 
 @pytest.fixture()
 def client(app):
+    ctx = app.test_request_context()
+    ctx.push()
+    app.test_client_class = FlaskClient
     return app.test_client()
-
 
 @pytest.fixture()
 def runner(app):

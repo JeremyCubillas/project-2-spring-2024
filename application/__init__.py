@@ -39,5 +39,10 @@ def init_app():
 
 
 @login_manager.user_loader
-def load_user(user_id):
-    return User.find_user_by_id(user_id)
+def user_loader(user_id):
+    """Given *user_id*, return the associated User object.
+
+    :param unicode user_id: user_id (email) user to retrieve
+
+    """
+    return User.query.get(user_id)

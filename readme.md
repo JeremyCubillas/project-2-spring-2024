@@ -1,22 +1,24 @@
-# Flask, User Registration with WTF Forms
+# Web Security Overview and Login and Registraion with User Profile
 
-In this assignment, you will need to watch the video and review the code discussed. You should read the articles as well.
-You will need to add the registration route to this [file](application/bp/authentication/__init__.py) 
-and you can view the code [here](readme_images/registration_route.png).
+In this assignment, you will need to watch the video and review the code discussed. You will need to add the code to
+make the Login, Registration, and User Profile model work.
 
 # Overview Video
 
-1. [Flask Bootstrap User Registration Part 1](https://youtu.be/IOu5w6P0gVQ)
+1. [Web Security Overview](https://youtu.be/xBSd-U-QB7g)
+2. Repository and Video The Shows HOw to Deploy the App on Oracle Cloud using Docker  [Fixes Video Mistake in Video 1](https://github.com/kaw393939/docker-nginx-flask)
+3. [Code OVerview for Login and Adding The Profile Model and Form](https://youtu.be/ScfbDhiUdG4)
 
 # Specific Readings - Web Security
+
 1. https://owasp.org/www-community/attacks/csrf  <-must read
 2. https://owasp.org/www-community/attacks/SQL_Injection
 
 # Look Over the documentation for these libraries that I, you will need to become familiar with them to solve problems
+
 * https://flask-wtf.readthedocs.io/en/1.0.x/  <-Very Useful
 * https://bootstrap-flask.readthedocs.io/en/stable/
 * https://getbootstrap.com
-
 
 # local Install Commands
 
@@ -26,13 +28,13 @@ and you can view the code [here](readme_images/registration_route.png).
 4. pytest
 
 # Docker Install / Run Commands
+
 1. docker compose up
+
 ## Fix Mac Permission Error after docker compose up --build  command - Run these on the terminal
 
 * chmod +x ./development.sh
 * chmod +x ./production.sh
-
-
 
 # General Readings - You should at least look these over because you will need to refer to these in the future for your project.
 

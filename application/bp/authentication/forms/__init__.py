@@ -3,6 +3,18 @@ from wtforms import validators
 from wtforms.fields import *
 
 
+class ProfileForm(FlaskForm):
+    first_name = StringField('First Name')
+    last_name = StringField('Last Name')
+    phone = StringField('Phone Number')
+    submit = SubmitField()
+
+
+class GroupForm(FlaskForm):
+    title = StringField('Title')
+    submit = SubmitField()
+
+
 class LoginForm(FlaskForm):
     email = EmailField('Email Address', [
         validators.DataRequired(),

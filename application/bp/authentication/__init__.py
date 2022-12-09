@@ -1,8 +1,8 @@
-from flask import Blueprint, render_template, redirect, url_for, flash
+from flask import Blueprint, render_template, redirect, url_for, flash, request
 from flask_login import login_user, login_required, current_user, logout_user
 
-from application.database import User, db
-from application.bp.authentication.forms import RegisterForm, LoginForm
+from application.database import User, db, Profile, Group
+from application.bp.authentication.forms import RegisterForm, LoginForm, ProfileForm, GroupForm
 
 authentication = Blueprint('authentication', __name__, template_folder='templates')
 
@@ -22,7 +22,7 @@ def dashboard():
 
 @authentication.route('/users/<user_id>')
 def user_by_id(user_id):
-    user = User.find_user_by_id(user_id)
+    user = User.find_by_id(user_id)
     return render_template('user.html', user=user)
 
 
@@ -52,8 +52,8 @@ def login():
             user.authenticated = True
             user.save()
             login_user(user)
-
-            return redirect(url_for('authentication.dashboard'))
+            next_page = request.args.get('next')
+            return redirect(next_page or url_for('authentication.dashboard'))
         else:
             flash('Password Incorrect')
     return render_template('login.html', form=form)
@@ -62,5 +62,70 @@ def login():
 @authentication.route('/logout')
 @login_required
 def logout():
+    current_user.authenticated = False
+    current_user.save()
     logout_user()
+    flash("You are Logged Out")
     return redirect(url_for('homepage.homepage'))
+
+
+@authentication.route('/profile', methods=['GET', 'POST'])
+@login_required
+def profile():
+    form = ProfileForm(obj=current_user.profile)
+    if form.validate_on_submit():
+        user_profile = Profile(form.first_name.data, form.last_name.data, form.phone.data)
+        current_user.profile = user_profile
+        current_user.save()
+
+    return render_template('profile.html', form=form)
+
+
+@authentication.route('/groups/new', methods=['GET', 'POST'])
+@login_required
+def group():
+    form = GroupForm()
+    if form.validate_on_submit():
+        group = Group(form.title.data)
+        group.save()
+        return redirect(url_for('authentication.groups'))
+
+    return render_template('group_form.html', form=form)
+
+
+@authentication.route('/groups/list/<int:page>', methods=['GET', 'POST'])
+@login_required
+def groups(page):
+    page = page
+    per_page = 1000
+    pagination = Group.query.paginate(page=page, per_page=per_page, error_out=False)
+    data = pagination.items
+    return render_template('groups.html', data=data, Model=Group, pagination=pagination)
+
+
+@authentication.route('/groups/<group_id>/delete', methods=['POST', 'GET'])
+@login_required
+def group_delete(group_id):
+    group = Group.find_by_id(group_id)
+    group.delete()
+    return redirect(url_for('authentication.groups'))
+
+
+@authentication.route('/groups/<group_id>/edit', methods=['POST', 'GET'])
+@login_required
+def group_edit(group_id):
+    group = Group.find_by_id(group_id)
+    form = GroupForm(obj=group)
+    if form.validate_on_submit():
+        group = Group(form.title.data)
+        group.save()
+        return redirect(url_for('authentication.groups'))
+
+    return render_template('group_form.html', form=form)
+
+
+@authentication.route('/groups/<group_id>', methods=['POST', 'GET'])
+@login_required
+def group_view(group_id):
+    group = Group.find_by_id(group_id)
+    return render_template('group.html', data=group)

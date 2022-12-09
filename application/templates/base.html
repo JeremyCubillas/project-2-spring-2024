@@ -32,6 +32,9 @@
                     <div class="navbar-nav mr-auto">
                         {{ render_nav_item('homepage.about','About' ) }}
                         {% if current_user.is_authenticated %}
+                            {{ render_nav_item('authentication.dashboard','Dashboard' ) }}
+                            {{ render_nav_item('authentication.profile','My Profile' ) }}
+                            {{ render_nav_item('authentication.groups','Groups',page=1 ) }}
                             {{ render_nav_item('authentication.logout','Logout' ) }}
                         {% else %}
                             {{ render_nav_item('authentication.login','Login' ) }}
