@@ -3,22 +3,18 @@
 In this assignment, you will need to watch the video and review the code discussed. You will need to add the code to
 make the Login, Registration, and User Profile model work.
 
-# Overview Video
+## Screenshots of the code
+
+## Overview Video
 
 1. [Web Security Overview](https://youtu.be/xBSd-U-QB7g)
 2. Repository and Video The Shows HOw to Deploy the App on Oracle Cloud using Docker  [Fixes Video Mistake in Video 1](https://github.com/kaw393939/docker-nginx-flask)
 3. [Code OVerview for Login and Adding The Profile Model and Form](https://youtu.be/ScfbDhiUdG4)
 
-# Specific Readings - Web Security
+## Screenshots of the code
 
-1. https://owasp.org/www-community/attacks/csrf  <-must read
-2. https://owasp.org/www-community/attacks/SQL_Injection
-
-# Look Over the documentation for these libraries that I, you will need to become familiar with them to solve problems
-
-* https://flask-wtf.readthedocs.io/en/1.0.x/  <-Very Useful
-* https://bootstrap-flask.readthedocs.io/en/stable/
-* https://getbootstrap.com
+### Login Code
+1. [Login route]()
 
 # local Install Commands
 
@@ -29,7 +25,7 @@ make the Login, Registration, and User Profile model work.
 
 # Docker Install / Run Commands
 
-1. docker compose up
+1. docker compose up --build
 
 ## Fix Mac Permission Error after docker compose up --build  command - Run these on the terminal
 

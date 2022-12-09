@@ -108,7 +108,7 @@ def groups(page):
 def group_delete(group_id):
     group = Group.find_by_id(group_id)
     group.delete()
-    return redirect(url_for('authentication.groups'))
+    return redirect(url_for('authentication.groups', page='1'))
 
 
 @authentication.route('/groups/<group_id>/edit', methods=['POST', 'GET'])
@@ -117,9 +117,9 @@ def group_edit(group_id):
     group = Group.find_by_id(group_id)
     form = GroupForm(obj=group)
     if form.validate_on_submit():
-        group = Group(form.title.data)
+        group.title = form.title.data
         group.save()
-        return redirect(url_for('authentication.groups'))
+        return redirect(url_for('authentication.groups', page='1'))
 
     return render_template('group_form.html', form=form)
 
