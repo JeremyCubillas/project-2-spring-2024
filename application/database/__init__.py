@@ -4,8 +4,8 @@ Database Initialization and Models
 from flask import flash
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
-from sqlalchemy import ForeignKey
-from sqlalchemy.orm import relationship, Mapped, backref
+from sqlalchemy import ForeignKey, func
+from sqlalchemy.orm import relationship, Mapped, backref, load_only
 from werkzeug.security import generate_password_hash, check_password_hash
 
 db = SQLAlchemy()
@@ -25,6 +25,19 @@ class GenericSQLAlchemyMethods:
     def record_count(cls):
         return cls.query.count()
 
+    @classmethod
+    def add_all(cls, records: list):
+        db.session.add_all(records)
+        return db.session.commit()
+
+    @classmethod
+    def get_random_record(cls):
+        return cls.query.order_by(func.random()).first()
+
+    @classmethod
+    def get_paginator(cls, page: int = 1, per_page: int = 10, error_out: bool = False):
+        return cls.query.paginate(page=page, per_page=per_page, error_out=error_out)
+
     def save(self):
         db.session.add(self)
         return db.session.commit()
@@ -39,7 +52,7 @@ class User(UserMixin, db.Model, GenericSQLAlchemyMethods):
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(128))
     password = db.Column(db.String(128))
-    authenticated = db.Column(db.Boolean)
+    authenticated = db.Column(db.Boolean, default=False)
     active = db.Column(db.Boolean)
     profile = relationship("Profile", uselist=False, backref="user", cascade="all, delete-orphan")
     groups = relationship("Group", secondary="membership")

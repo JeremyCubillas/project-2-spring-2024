@@ -23,7 +23,7 @@ def create_5_users(app, faker):
 
     with app.app_context():
         for i in range(number_of_users):
-            user = User(faker.email(), faker.password())
+            user = User(faker.email(), 'testtest')
             user_list.append(user)
 
         db.session.add_all(user_list)

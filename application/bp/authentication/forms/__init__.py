@@ -3,6 +3,16 @@ from wtforms import validators
 from wtforms.fields import *
 
 
+class JoinGroupForm(FlaskForm):
+    group_id = HiddenField("Group ID")
+    submit = SubmitField("Join", render_kw={"class": "btn-success"})
+
+
+class LeaveGroupForm(FlaskForm):
+    group_id = HiddenField("Group ID")
+    submit = SubmitField("Leave", render_kw={"class": "btn-danger"})
+
+
 class ProfileForm(FlaskForm):
     first_name = StringField('First Name')
     last_name = StringField('Last Name')
