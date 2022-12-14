@@ -100,9 +100,8 @@ class Profile(db.Model, GenericSQLAlchemyMethods):
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
     first_name = db.Column(db.String(128))
     last_name = db.Column(db.String(128))
-    phone = db.Column(db.String(12))
 
-    def __init__(self, first_name, last_name, phone):
+    def __init__(self, first_name, last_name):
         self.first_name = first_name
         self.last_name = last_name
         self.phone = phone
@@ -127,6 +126,7 @@ class Membership(db.Model, GenericSQLAlchemyMethods):
 class SampleCalc(db.Model, GenericSQLAlchemyMethods):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
+    z_score = db.Column(db.Numeric(10, 2))
     margin_error = db.Column(db.Numeric(10, 2))
     std = db.Column(db.Numeric(10, 2))
     population_size = db.Column(db.Integer)

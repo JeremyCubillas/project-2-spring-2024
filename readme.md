@@ -1,19 +1,43 @@
 # Project 2
 
-For  this project, you need to implement the login, registration, and logout functionality as you have done previously. 
+For this project, you need to fix 16 tests by running each test individually and fixing the error. Many of the errors
+are just the wrong text is being displayed or it is not redirecting the user to the proper web page; however, some
+errors are more challenging.
 
 ## In addition, you will need to implement the following functionality:
 
 1. A user goes to the homepage
 2. A user clicks on the link for "Calculate Sample"
-3. If the user is not logged in they are prompted to login and after login they are redirected to a sample calculation form.
+3. If the user is not logged in they are prompted to login and after login they are redirected to a sample calculation
+   form.
 4. The sample calculation form should have a dropdown form control to select the z-score / confidence.
-5. Once the user enters the values they should press the submit button and be redirected to a list of sample size calculations that they have previously entered.
+5. Once the user enters the values they should press the submit button and be redirected to a list of sample size
+   calculations that they have previously entered.
 
+## How to complete the project
+
+### Fis each test in order by running pytest tests/<replace with name of test>.py
+
+1. test_about_page.py
+2. test_index_page.py
+3. test_login_bad_password.py
+4. test_login_dashboard.py
+5. test_login_success.py
+6. test_login_user_not_found.py
+7. test_logout.py
+8. test_profile_controller.py
+9. test_profile_model.py
+10. test_registration_duplicate_fail.py
+11. test_registration_success.py
+12. test_sample_authenticated_menu.py
+13. test_sample_login_redirect.py
+14. test_sample_model.py
+15. test_sample_route.py
+16. test_sample_unauthenticated_menu.py
 
 ## Unit Videos
 
-1. [Project Overview and Instructions](https://youtu.be/xBSd-U-QB7g)
+1. [Project Overview and Instructions](https://youtu.be/KmB3ZhFnsZg)
 
 #### Basically, you should learn is this workflow:
 
@@ -51,10 +75,12 @@ All the following code goes in the route file [here](application/bp/authenticati
 1. [Login route]()
 
 # Optional Readings
+
 1. [SQL Alchemy with Flask Relationships](https://flask-sqlalchemy.palletsprojects.com/en/2.x/models/)
 2. [Flask Routing](https://hackersandslackers.com/flask-routes/)
 3. [Flask WTF Forms](https://www.digitalocean.com/community/tutorials/how-to-use-and-validate-web-forms-with-flask-wtf)
 4. [Flask Login Explained](https://www.freecodecamp.org/news/how-to-authenticate-users-in-flask/)
+
 # local Installation Commands
 
 1. pip(3) install -r requirements.txt
