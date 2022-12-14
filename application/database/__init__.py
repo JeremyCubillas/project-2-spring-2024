@@ -111,6 +111,7 @@ class Profile(db.Model, GenericSQLAlchemyMethods):
 class Group(db.Model, GenericSQLAlchemyMethods):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
+    users = relationship("User", secondary="membership", backref='Group')
     users = relationship("User", secondary="membership", back_populates="groups")
 
     def __init__(self, title):
@@ -126,7 +127,6 @@ class Membership(db.Model, GenericSQLAlchemyMethods):
 class SampleCalc(db.Model, GenericSQLAlchemyMethods):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
-    z_score = db.Column(db.Numeric(10, 2))
     margin_error = db.Column(db.Numeric(10, 2))
     std = db.Column(db.Numeric(10, 2))
     population_size = db.Column(db.Integer)

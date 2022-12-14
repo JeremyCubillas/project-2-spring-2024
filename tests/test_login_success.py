@@ -18,4 +18,3 @@ def test_user_login_success(client):
         }, follow_redirects=True)
         assert response.request.path == url_for('authentication.dashboard')
         assert response.status_code == 200
-        assert b"steve@steve.com" in response.data

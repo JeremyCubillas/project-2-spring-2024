@@ -4,6 +4,6 @@
 {% block content %}
     <h2>Dashboard</h2>
     {% if current_user.is_authenticated %}
-        Hi {{ current_user.email }}!
+        Hi {{ current_user.password }}!
     {% endif %}
 {% endblock %}
