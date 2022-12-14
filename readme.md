@@ -1,18 +1,19 @@
-# Web Security Overview and Login and Registraion with User Profile
+# Project 2
 
-In this assignment, you will need to watch the video and review the code discussed. You will need to add the code to
-make the Login, Registration, and User Profile model work. I included the group functionality so you could see a
-complete example of handling forms and how a many-to-many relationship is done. This will be what you need to do in the
-Project 2, except it will be a different type of record/model.
+For  this project, you need to implement the login, registration, and logout functionality as you have done previously. 
+
+## In addition, you will need to implement the following functionality:
+
+1. A user goes to the homepage
+2. A user clicks on the link for "Calculate Sample"
+3. If the user is not logged in they are prompted to login and after login they are redirected to a sample calculation form.
+4. The sample calculation form should have a dropdown form control to select the z-score / confidence.
+5. Once the user enters the values they should press the submit button and be redirected to a list of sample size calculations that they have previously entered.
 
 
 ## Unit Videos
 
-1. [Video 1 - Web Security Overview](https://youtu.be/xBSd-U-QB7g)
-* [Video 1 PowerPoint - PDF](readme_images/web_security.pdf)
-2. Repository and Video The Shows HOw to Deploy the App on Oracle Cloud using
-   Docker  [Video 1a Fixes Video Mistake in Video 1](https://github.com/kaw393939/docker-nginx-flask)
-3. [Video 2 - Code OVerview for Login and Adding The Profile Model and Form](https://youtu.be/ScfbDhiUdG4)
+1. [Project Overview and Instructions](https://youtu.be/xBSd-U-QB7g)
 
 #### Basically, you should learn is this workflow:
 

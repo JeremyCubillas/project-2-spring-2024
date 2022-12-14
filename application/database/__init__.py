@@ -5,6 +5,7 @@ from flask import flash
 from flask_login import UserMixin
 from flask_sqlalchemy import SQLAlchemy
 from sqlalchemy import ForeignKey, func
+from sqlalchemy.ext.hybrid import hybrid_property
 from sqlalchemy.orm import relationship, Mapped, backref, load_only
 from werkzeug.security import generate_password_hash, check_password_hash
 
@@ -56,7 +57,7 @@ class User(UserMixin, db.Model, GenericSQLAlchemyMethods):
     active = db.Column(db.Boolean)
     profile = relationship("Profile", uselist=False, backref="user", cascade="all, delete-orphan")
     sample_calcs = relationship("SampleCalc", uselist=True, backref="user", cascade="all, delete-orphan")
-    groups = relationship("Group", secondary="membership")
+    groups = relationship("Group", secondary="membership", back_populates="users")
 
     def __init__(self, email, password, active=True):
         self.email = email
@@ -110,7 +111,7 @@ class Profile(db.Model, GenericSQLAlchemyMethods):
 class Group(db.Model, GenericSQLAlchemyMethods):
     id = db.Column(db.Integer, primary_key=True)
     title = db.Column(db.String(255))
-    users = relationship("User", secondary="membership")
+    users = relationship("User", secondary="membership", back_populates="groups")
 
     def __init__(self, title):
         self.title = title
@@ -121,14 +122,11 @@ class Membership(db.Model, GenericSQLAlchemyMethods):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
     group_id = db.Column(db.Integer, db.ForeignKey('group.id'))
 
-    user = relationship(User, backref=backref("membership", cascade="all, delete-orphan"))
-    group = relationship(Group, backref=backref("membership", cascade="all, delete-orphan"))
-
 
 class SampleCalc(db.Model, GenericSQLAlchemyMethods):
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, ForeignKey('user.id'))
-    confidence = db.Column(db.Numeric(10, 2))
+    z_score = db.Column(db.Numeric(10, 2))
     margin_error = db.Column(db.Numeric(10, 2))
     std = db.Column(db.Numeric(10, 2))
     population_size = db.Column(db.Integer)
@@ -139,8 +137,10 @@ class SampleCalc(db.Model, GenericSQLAlchemyMethods):
         self.std = std
         self.population_size = population_size
 
+    @hybrid_property
     def calc_sample_size(self):
         numerator = (pow(self.z_score, 2) * self.std * (1 - self.std)) / (pow(self.margin_error, 2))
         denominator = 1 + ((pow(self.z_score, 2) * self.std * (1 - self.std)) / (
                 pow(self.margin_error, 2) * self.population_size))
-        return numerator / denominator
+        answer = numerator / denominator
+        return round(answer, 2)

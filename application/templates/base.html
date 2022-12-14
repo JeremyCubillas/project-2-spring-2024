@@ -34,11 +34,15 @@
                         {% if current_user.is_authenticated %}
                             {{ render_nav_item('authentication.dashboard','Dashboard' ) }}
                             {{ render_nav_item('authentication.profile','My Profile' ) }}
+                            {{ render_nav_item('sample_size.my_sample_calcs','My Sample Sizes' ) }}
+                            {{ render_nav_item('sample_size.sample_size_page' ,'Calculate Sample' ) }}
                             {{ render_nav_item('authentication.groups','Groups',page=1 ) }}
                             {{ render_nav_item('authentication.logout','Logout' ) }}
                         {% else %}
                             {{ render_nav_item('authentication.login','Login' ) }}
                             {{ render_nav_item('authentication.registration','Register' ) }}
+                            {{ render_nav_item('sample_size.sample_size_page' ,'Calculate Sample' ) }}
+
                         {% endif %}
                     </div>
                 </div>

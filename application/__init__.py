@@ -10,6 +10,7 @@ from application.database import db, User
 import config
 from application.bp.homepage import bp_homepage
 from application.bp.authentication import authentication
+from application.bp.sample_calc import sample_size
 from flask_login import LoginManager
 
 migrate = Migrate()
@@ -31,7 +32,7 @@ def init_app():
     migrate.init_app(app, db)
 
     with app.app_context():
-        blueprints = [bp_homepage, authentication]
+        blueprints = [bp_homepage, authentication, sample_size]
         # Register Blueprints
         for blueprint in blueprints:
             app.register_blueprint(blueprint)
