@@ -13,7 +13,7 @@ flask db migrate -m 'first migration'
 flask db upgrade
 Submit the link to the repo on GitHub Classroom here.
 
-## DON'T FORGET TO COMMIT YOU MIGRATION FILES OR IT WILL FAIL!
+## DON'T FORGET TO COMMIT YOUR MIGRATION FILES OR IT WILL FAIL!
 
 ## How to complete the project
 
